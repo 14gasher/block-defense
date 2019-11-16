@@ -13,7 +13,20 @@ class Blockchain {
 
   constructor() {
     this.chain = [Block.genesis()]
+  }
 
+  addBlock(block) { //Does this need more???? Like check if valid?
+    if(block.isValid())
+      this.chain.push(block)
+  }
+
+  replaceChain(chainToReplace) {
+    if(chainToReplace.length <= this.chain.length)
+      return
+
+    chainToReplace.forEach(block => { if(!block.isValid) return })
+    
+    this.chain = chainToReplace
   }
 }
 

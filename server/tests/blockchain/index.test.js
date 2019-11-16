@@ -15,7 +15,7 @@ describe('Blockchain', () => {
   }
   describe('Static', () => {
     it('Can verify a chain', () => {
-      BlockChain.verifyChain(blockChain).should.equal(true)
+      BlockChain.verifyChain(blockChain.chain).should.equal(true)
     })
   })
 
@@ -41,7 +41,7 @@ describe('Blockchain', () => {
     it('Should replace with a longer, valid chain', () => {
       const blockChain2 = new BlockChain()
       blockChain2.replaceChain(blockChain.chain)
-      blockChain2.length.should.equal(2)
+      blockChain2.chain.length.should.equal(2)
     })
   })
 })
