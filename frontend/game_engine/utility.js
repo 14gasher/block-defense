@@ -7,17 +7,21 @@ Array.prototype.shuffle = function() {
 }
 
 class Vector { // Useful physics class
-  constructor(specs) {
-    if(specs.hasOwnProperty('components')) {
-      this.magnitude = Math.sqrt(specs.components.x * specs.components.x + specs.components.y * specs.components.y)
-      this.direction = Math.atan2(specs.components.y, specs.components.x)
-      this.components = specs.components
+  constructor({
+    components = false,
+    magnitude,
+    direction,
+  }) {
+    if(components) {
+      this.magnitude = Math.sqrt(components.x * components.x + components.y * components.y)
+      this.direction = Math.atan2(components.y, components.x)
+      this.components = components
     } else {
-      this.magnitude = specs.magnitude
-      this.direction = specs.direction
+      this.magnitude = magnitude
+      this.direction = direction
       this.components = {
-        x: Math.cos(specs.direction) * specs.magnitude,
-        y: Math.sin(specs.direction) * specs.magnitude,
+        x: Math.cos(direction) * magnitude,
+        y: Math.sin(direction) * magnitude,
       }
     }
   }
