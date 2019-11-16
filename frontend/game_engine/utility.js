@@ -1,9 +1,9 @@
 Array.prototype.shuffle = function() {
-    for (let i = this.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [this[i], this[j]] = [this[j], this[i]];
-    }
-    return this
+  for (let i = this.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [this[i], this[j]] = [this[j], this[i]]
+  }
+  return this
 }
 
 class Vector { // Useful physics class
@@ -36,3 +36,5 @@ function fn2workerURL(fn) {
   var blob = new Blob(['('+fn.toString()+')()'], {type: 'application/javascript'})
   return URL.createObjectURL(blob)
 }
+
+module.exports = Vector

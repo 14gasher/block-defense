@@ -190,3 +190,5 @@ class Texture extends Drawable { // Draws Textures
     context.restore()
   }
 }
+
+module.exports = GraphicAPI

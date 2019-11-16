@@ -104,3 +104,5 @@ class Particle extends Drawable {
     context.restore()
   }
 }
+
+module.exports = ParticleEngine

@@ -28,9 +28,9 @@ class RandomEngine {
 
   gaussian(mean = 0, stdDev = 1) {
     let x1 = 0,
-        x2 = 0,
-        y1 = 0,
-        z = 0
+      x2 = 0,
+      y1 = 0,
+      z = 0
     if(this.usePrevious) {
       this.usePrevious = false
       return mean + this.y2 * stdDev
@@ -56,3 +56,5 @@ class RandomEngine {
 }
 
 const RandomGenerator = new RandomEngine()
+
+module.exports = RandomEngine

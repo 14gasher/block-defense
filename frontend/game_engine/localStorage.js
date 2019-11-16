@@ -54,3 +54,5 @@ class SessionStorage {  // Data dies after browser closed
     return true
   }
 }
+
+module.exports = Storage

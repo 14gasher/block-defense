@@ -36,13 +36,13 @@ class InputController {
     for(let i = 0; i < this.events.length; i++) {
       const e = this.events[i]
       switch(e.type) {
-        case EVENT_TYPE.keydown:
+      case EVENT_TYPE.keydown:
         this.handleKeyDown.forEach(todo => todo(e.key))
         break
-        case EVENT_TYPE.keyup:
+      case EVENT_TYPE.keyup:
         this.handleKeyUp.forEach(todo => todo(e.key))
         break
-        default:
+      default:
         break
       }
     }
@@ -51,13 +51,13 @@ class InputController {
 
   addListener(type, toDo) {
     switch (type) {
-      case EVENT_TYPE.keydown:
+    case EVENT_TYPE.keydown:
       this.handleKeyDown.push(toDo)
       break
-      case EVENT_TYPE.keyup:
+    case EVENT_TYPE.keyup:
       this.handleKeyUp.push(toDo)
       break
-      default:
+    default:
       throw 'Unknown Event Type: ' + type
     }
   }
@@ -67,3 +67,5 @@ class InputController {
     this.handleKeyUp.length = 0
   }
 }
+
+module.exports = InputController
