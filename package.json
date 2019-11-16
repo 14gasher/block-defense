@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-server-dev": "nodemon --watch server",
-    "start-front-dev": "nodemon --watch frontend -x \"yarn build\"",
+    "start-server-dev": "nodemon --watch server index.js",
+    "start-front-dev": "nodemon --watch frontend -x \"yarn build\" index.js",
     "test-server-dev": "nodemon --watch server/test --execute 'yarn test-server || 1'",
     "test-server": "npx mocha server/tests/**/*.js --exit",
     "build": "yarn transpile && yarn bundle",
