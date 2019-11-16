@@ -1,8 +1,8 @@
 const Sprite = require('./sprite')
 
 class OffenseBaseObject extends Sprite { 
-  constructor(health, pos, type, pwr, speed, atkSpeed, atkRange) {
-    super(health, pos, type)
+  constructor(health, pos, type, pwr, speed, atkSpeed, atkRange, src) {
+    super(health, pos, type, src)
     this.power = pwr
     this.speed = speed
     this.attackSpeed = atkSpeed

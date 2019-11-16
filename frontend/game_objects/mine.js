@@ -5,8 +5,8 @@ const INCOME_RATE = 5
 
 class Mine extends Sprite {
 
-  constructor(pos, type) {
-    super(MINE_HEALTH, pos, type)
+  constructor(pos, type, src) {
+    super(MINE_HEALTH, pos, type, src)
     this.incomePerRnd = INCOME_RATE
   }
 

@@ -1,17 +1,20 @@
+const Texture = require('../game_engine/drawables/texture')
+const Z_INDEX = require('../game_engine/drawables/zIndex')
+
 class Sprite { 
-  constructor(health, pos, type, src) {
+  constructor(health, pos, type, src,) {
     this.health = health
     this.type = type //ally or enemy
     this.position = {
       x: pos.x,
-      y: 
-      this.renderable = new Texture({
-        src: src,
-        center: this.position, // reference to this to allow simple updates
-        dimensions: this.dimensions,
-        z_index: ZINDEX.FOREGROUND,
-      })
+      y: pos.y,
     }
+    this.renderable = new Texture({
+      src: src,
+      center: this.position, // reference to this to allow simple updates
+      // dimensions: this.dimensions,
+      z_index: Z_INDEX.FOREGROUND,
+    })
   }
 
   updatePosition(newPos) {

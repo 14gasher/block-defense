@@ -2,8 +2,8 @@ const Sprite = require('./sprite')
 const HOME_HEALTH = 1000
 
 class HomeBase extends Sprite {
-  constructor(pos, type) {
-    super(HOME_HEALTH, pos, type)
+  constructor(pos, type, src) {
+    super(HOME_HEALTH, pos, type, src)
   }
 }
 
