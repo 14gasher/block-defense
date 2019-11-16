@@ -1,4 +1,4 @@
-const EVENT_TYPE = {
+export const EVENT_TYPE = {
   keydown: Symbol('keydown'),
   keyup: Symbol('keyup'),
 }
@@ -68,4 +68,4 @@ class InputController {
   }
 }
 
-module.exports = InputController
+export default InputController

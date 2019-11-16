@@ -4,7 +4,6 @@ const Vector = require('../game_engine/utility')
 import {
   areaIntersection,
 } from './utilities'
-import { start } from 'repl'
 
 class OffenseBaseObject extends Sprite {
   constructor({
@@ -29,10 +28,9 @@ class OffenseBaseObject extends Sprite {
     this.enemyHome = enemyHome
   }
 
-  update(delta) { //Calculates new position
+  update(delta, gameObjects) { //Calculates new position
     super.update(delta)
-
-    let direction = this.findDirection() //Sets unit to move or attack
+    let direction = this.findDirection(gameObjects.filter(a => a.type !== this.type)) //Sets unit to move or attack
     let newPos = {
       x: this.position.x + (this.speed * delta * Math.cos(direction)),
       y: this.position.y + (this.speed * delta * Math.sin(direction)),
@@ -41,8 +39,8 @@ class OffenseBaseObject extends Sprite {
     this.updatePosition(newPos)
   }
 
-  findDirection() {
-    let nextMove = this.findShortestPath()
+  findDirection(obstacles) {
+    let nextMove = this.findShortestPath(obstacles)
     if(nextMove.x === this.position.x && nextMove.y === this.position.y) {
       this.speed = this.origSpeed
       return (new Vector({
@@ -77,8 +75,9 @@ class OffenseBaseObject extends Sprite {
           const bl = mkPt(mox, poy)
           const br = mkPt(pox, poy)
           return {
+            x: o.position.x,
+            y: o.position.y,
             health: o.health,
-            ...o.position,
             tl,tr,bl,br,
           }
         })
@@ -114,20 +113,35 @@ class OffenseBaseObject extends Sprite {
           priorityQ.push({
             startWeight: startWeight + this.calcWeight(obstacle, position),
             position: {x:obstacle.x, y:obstacle.y},
-            filter: filter.concat([{...obstacle}]),
+            filter: filter.concat([{
+              tr:obstacle.tr,
+              br:obstacle.br,
+              tl:obstacle.tl,
+              bl:obstacle.bl
+            }]),
             history: history.concat([position])
           })
           // weight if move to edges
           priorityQ.push({
             startWeight: startWeight + this.calcDistanceWeight(obstacle.tr, position),
             position: obstacle.tr,
-            filter: filter.concat([{ ...obstacle }]),
+            filter: filter.concat([{
+              tr: obstacle.tr,
+              br: obstacle.br,
+              tl: obstacle.tl,
+              bl: obstacle.bl
+            }]),
             history: history.concat([position])
           })
           priorityQ.push({
             startWeight: startWeight + this.calcDistanceWeight(obstacle.tl, position),
             position: obstacle.tl,
-            filter: filter.concat([{ ...obstacle }]),
+            filter: filter.concat([{
+              tr: obstacle.tr,
+              br: obstacle.br,
+              tl: obstacle.tl,
+              bl: obstacle.bl
+            }]),
             history: history.concat([position])
           })
         })
@@ -153,4 +167,4 @@ class OffenseBaseObject extends Sprite {
   }
 }
 
-module.exports = OffenseBaseObject
+export default OffenseBaseObject

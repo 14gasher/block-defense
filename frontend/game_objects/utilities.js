@@ -42,6 +42,6 @@ export const lineIntersect = ({line1:[p1,q1], line2:[p2,q2]}) => {
   return false
 }
 
-export const lineAreaIntersection = ({line, area}) => {
+export const areaIntersection = ({line, area}) => {
   return area.reduce((acc, next) => acc || lineIntersect({line1: line, line2: next}), false)
 }

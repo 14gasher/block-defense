@@ -1,7 +1,7 @@
 const Sprite = require('./sprite')
 
-class DefenseBaseObject extends Sprite { 
-  constructor(health, pos, type, pwr, atkSpeed, atkRange, src) {
+class DefenseBaseObject extends Sprite {
+  constructor({health, pos, type, pwr, atkSpeed, atkRange, src}) {
     super(health, pos, type, src)
     this.power = pwr
     this.attackSpeed = atkSpeed
@@ -9,7 +9,7 @@ class DefenseBaseObject extends Sprite {
   }
 
   //Potential methods to implement:
-  // inRange(), 
+  // inRange(),
 }
 
 module.exports = DefenseBaseObject
