@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-server-dev": "nodemon --watch server index.js",
-    "start-front-dev": "yarn build && nodemon --watch frontend --config front.nodemon.config.json",
-    "test-server-dev": "nodemon --watch server/test -x 'yarn test-server || 1'",
-    "test-server": "npx mocha server/tests/**/*.js --exit",
+    "start-server-dev": "nodemon -V --watch server index.js",
+    "start-front-dev": "yarn build && nodemon -V --watch frontend --config front.nodemon.config.json",
+    "test-server-dev": "nodemon -V --watch server/tests -x \"yarn test-server\"",
+    "test-server": "npx mocha server/tests/**/*.test.js --exit",
     "build": "yarn transpile && yarn bundle",
     "transpile": "npx babel frontend --out-dir transpile",
     "bundle": "npx webpack",
@@ -28,6 +28,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "eslint": "^6.6.0",
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "ws": "^7.2.0"
   }
 }
