@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "start-server-dev": "nodemon --watch server",
+    "start-front-dev": "nodemon --watch frontend -x \"yarn build\"",
+    "test-server-dev": "nodemon --watch server/test --execute 'yarn test-server || 1'",
+    "test-server": "npx mocha server/tests/**/*.js --exit",
+    "build": "yarn transpile && yarn bundle",
+    "transpile": "npx babel frontend",
+    "bundle": "npx webpack",
+    "lint": "npx eslint --fix . --ext .js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +20,14 @@
     "express": "^4.17.1",
     "nodemon": "^1.19.4",
     "socket.io": "^2.3.0",
-    "webpack": "^4.41.2"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^6.6.0",
+    "mocha": "^6.2.2"
   }
 }
