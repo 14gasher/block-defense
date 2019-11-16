@@ -43,22 +43,16 @@ class OffenseBaseObject extends Sprite {
 
   findDirection() {
     let nextMove = this.findShortestPath()
-    let v
-    switch(nextMove.type) {
-    case 'move' :
+    if(nextMove.x === this.position.x && nextMove.y === this.position.y) {
       this.speed = this.origSpeed
-      v = new Vector({
+      return (new Vector({
         components: {
           x: nextMove.x - this.position.x,
-          y: nextMove.y - this.position.y,}
-      })
-      return v.direction
-    case 'destroy' :
-      this.speed = 0
-      return 0
-    default :
-      throw new Error('Hmmm. Looks like that want a good... something. I don\'t know.' + JSON.stringify(nextMove))
+          y: nextMove.y - this.position.y,
+        }
+      })).direction
     }
+    this.speed = 0
   }
 
   findShortestPath(obstacles) {
@@ -138,12 +132,11 @@ class OffenseBaseObject extends Sprite {
           })
         })
 
-        priorityQ = priorityQ
-          .filter(a => a.startWeight < bestWeight)
-          .sort((a, b) => (b.startWeight - a.startWeight))
-
-      }
-      return bestHistory
+      priorityQ = priorityQ
+        .filter(a => a.startWeight < bestWeight)
+        .sort((a, b) => (b.startWeight - a.startWeight))
+    }
+    return bestHistory[0]
   }
 
   calcDistanceWeight(obstacle, position) {
@@ -158,7 +151,6 @@ class OffenseBaseObject extends Sprite {
     const dat = target.health / (this.pwr * this.atkSpeed)
     return dt + dat // travel + attack time
   }
-
 }
 
 module.exports = OffenseBaseObject
