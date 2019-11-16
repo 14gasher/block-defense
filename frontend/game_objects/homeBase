@@ -1,0 +1,10 @@
+const Sprite = require('./sprite')
+const HOME_HEALTH = 1000
+
+class HomeBase extends Sprite {
+  constructor(pos) {
+    super(HOME_HEALTH, pos)
+  }
+}
+
+module.exports = HomeBase
