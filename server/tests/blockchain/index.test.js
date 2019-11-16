@@ -4,11 +4,14 @@ const should = chai.should()
 const Block = require('../../blockchain/block')
 const BlockChain = require('../../blockchain')
 
+const TestBlocks = require('./testSetup')
+
+
 describe('Blockchain', () => {
   const blockChain = new BlockChain()
   const blocks = {
-    valid: {},
-    invalid: {},
+    valid: new Block(TestBlocks.valid.transaction),
+    invalid: new Block(TestBlocks.invalid.noTransactions),
   }
   describe('Static', () => {
     it('Can verify a chain', () => {
@@ -18,7 +21,7 @@ describe('Blockchain', () => {
 
   describe('Instance', () => {
     it('First Block should be genesis block', () => {
-      blockChain.chain[0].should.deep.equal(Block.genesis())
+      Block.isGenesis(blockChain.chain[0]).should.equal(true)
     })
 
     it('Should add a valid block', () => {
