@@ -18,7 +18,7 @@ export class MainOffense extends OffenseBase {
       pwr: 2,
       atkSpeed: 500, // ms
       atkRange: 5,
-      src: 'resources/general/test.jpg',
+      src: isEnemy ? 'resources/units/jelly-fish-bad.png' : 'resources/units/jelly-fish-team.png',
       enemyHome,
     })
   }
@@ -33,7 +33,7 @@ export class MainDefense extends DefenseBase {
       pwr: 1,
       atkSpeed: 1000, // ms
       atkRange: 50,
-      src: 'resources/general/test.jpg',
+      src: isEnemy ? 'resources/units/clownish-bad.png' : 'resources/units/clownfish-team.png',
     })
   }
 }
@@ -43,7 +43,7 @@ export class HomeBase extends HomeBaseBase {
     super({
       pos: position,
       type: isEnemy ? PLAYER.ENEMY : PLAYER.HUMAN,
-      src: 'resources/general/test.jpg',
+      src: isEnemy ? 'resources/units/tower-bad.png' : 'resources/units/tower-team.png',
     })
   }
 }
@@ -53,7 +53,7 @@ export class Mine extends MineBase {
     super({
       pos: position,
       type: isEnemy ? PLAYER.ENEMY : PLAYER.HUMAN,
-      src: 'resources/general/test.jpg',
+      src: isEnemy ? 'resources/units/worms-bad.png' : 'resources/units/worms-team.png',
     })
   }
 }
@@ -64,7 +64,7 @@ export class Wall extends WallBase {
     super({
       pos: position,
       type: isEnemy ? PLAYER.ENEMY : PLAYER.HUMAN,
-      src: 'resources/general/test.jpg',
+      src: isEnemy ? 'resources/units/rock-wall-bad.png' : 'resources/units/rock-wall-team.png',
     })
   }
 }
