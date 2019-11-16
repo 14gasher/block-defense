@@ -7,7 +7,7 @@ const app = express()
 app
   .use('/api', require('./server'))
   .use(express.static('public')) // Link all the public files
-  .use('*', (req, res) => res.sendFile(__dirname + '/public/index.html'))
+  .use('*', (req, res) => res.redirect('/'))
   .listen(port)
 
 console.log('Starting on port', port)

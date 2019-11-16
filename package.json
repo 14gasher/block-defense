@@ -6,11 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "start-server-dev": "nodemon --watch server index.js",
-    "start-front-dev": "nodemon --watch frontend -x \"yarn build\" index.js",
-    "test-server-dev": "nodemon --watch server/test --execute 'yarn test-server || 1'",
+    "start-front-dev": "yarn build && nodemon --watch frontend --config front.nodemon.config.json",
+    "test-server-dev": "nodemon --watch server/test -x 'yarn test-server || 1'",
     "test-server": "npx mocha server/tests/**/*.js --exit",
     "build": "yarn transpile && yarn bundle",
-    "transpile": "npx babel frontend",
+    "transpile": "npx babel frontend --out-dir transpile",
     "bundle": "npx webpack",
     "lint": "npx eslint --fix . --ext .js"
   },

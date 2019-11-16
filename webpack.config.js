@@ -1,6 +1,8 @@
+const path = require('path')
+
 module.exports = {
   entry: {
-    game: './frontend/index.js',
+    game: './transpile/index.js',
   },
   output: {
     filename: '[name].bundle.js',

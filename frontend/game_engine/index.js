@@ -14,10 +14,10 @@ class GameController {
     canvas.height = this.dimensions.height
     canvas.width = this.dimensions.width
     window.onresize = () => {
-        this.dimensions.width = window.innerWidth - 20
-        this.dimensions.height = window.innerHeight - 20
-        canvas.height = this.dimensions.height
-        canvas.width = this.dimensions.width
+      this.dimensions.width = window.innerWidth - 20
+      this.dimensions.height = window.innerHeight - 20
+      canvas.height = this.dimensions.height
+      canvas.width = this.dimensions.width
     }
     this.storage = new Storage()
     this.audio = new AudioController()
