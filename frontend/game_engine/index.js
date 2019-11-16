@@ -1,24 +1,18 @@
 const Storage = require('./localStorage')
 const AudioController = require('./audioController')
 const GraphicAPI = require('./graphicAPI')
-const ParticleEngine = require('./particleEngine')
-const InputController = require('./inputController')
+import ParticleEngine from './particleEngine'
+import InputController from './inputController'
 
 class GameController {
-  constructor({canvasID, render}) {
-    let canvas = document.getElementById(canvasID)
-    this.dimensions = {
-      width: window.innerWidth - 40,
-      height: window.innerHeight - 40,
-    }
+  constructor({ canvasId, render, dimensions = {
+    width: window.innerWidth - 40,
+    height: window.innerHeight - 40,
+  }}) {
+    let canvas = document.getElementById(canvasId)
+    this.dimensions = dimensions
     canvas.height = this.dimensions.height
     canvas.width = this.dimensions.width
-    window.onresize = () => {
-      this.dimensions.width = window.innerWidth - 20
-      this.dimensions.height = window.innerHeight - 20
-      canvas.height = this.dimensions.height
-      canvas.width = this.dimensions.width
-    }
     this.storage = new Storage()
     this.audio = new AudioController()
     this.graphic = new GraphicAPI(canvas.getContext('2d'), this.dimensions)
@@ -82,4 +76,4 @@ class GameController {
   }
 }
 
-module.exports = GameController
+export default GameController
