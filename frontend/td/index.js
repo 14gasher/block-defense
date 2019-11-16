@@ -1,5 +1,5 @@
 import GameEngine from '../game_engine'
-import {EVENT_TYPE} from '../game_engine/inputController'
+import { EVENT_TYPE } from '../game_engine/inputController'
 import QuadTree from './quadtree'
 
 import {
@@ -11,24 +11,43 @@ import {
 } from '../game_objects'
 
 class TowerDefense extends GameEngine {
-  constructor({canvasId}) {
-    super({canvasId, dimensions: {height: 500, width: 500}})
+  constructor({ canvasId }) {
+    super({ canvasId, dimensions: { height: 500, width: 500 } })
     this.money = 0
     this.gameObjects = []
   }
 
   startGame() {
     this.money = 0
+    const enemyHome = new HomeBase({ position: { x: this.dimensions.width / 2, y: 50 }, isEnemy: true })
+    const home = new HomeBase({ position: { x: this.dimensions.width / 2, y: this.dimensions.height - 50 }, isEnemy: false })
     this.gameObjects = [
-      new HomeBase({position:{x: this.dimensions.width / 2, y: 50}, isEnemy: true}),
-      new HomeBase({position:{x: this.dimensions.width / 2, y: this.dimensions.height - 50}, isEnemy: false}),
+      enemyHome,
+      home
     ]
 
     this.input.clearListeners()
     super.addInputHandler(EVENT_TYPE.keydown, key => {
       switch (key) {
-        default:
-          break
+      case ' ':
+        this.gameObjects.push(new MainDefense({
+          isEnemy: false, position: {
+            x: Math.random() * this.dimensions.height,
+            y: Math.random() * this.dimensions.width,
+          }
+        }))
+        break
+      case 'a':
+        this.gameObjects.push(new MainOffense({
+          position: {
+            x: home.position.x,
+            y: home.position.y,
+          },
+          enemyHome,
+        }))
+        break
+      default:
+        break
       }
     })
     super.startGame()
@@ -37,7 +56,7 @@ class TowerDefense extends GameEngine {
   update(delta) {
     super.update(delta)
     // If a home base destroyed, game over
-    if(false) {
+    if (false) {
       return this.endGame()
     }
     this.gameObjects.forEach(go => go.update(delta, this.gameObjects))
@@ -53,8 +72,8 @@ class TowerDefense extends GameEngine {
       objects: this.gameObjects,
     })
 
-    qt.getCollisions().forEach(([c1,c2]) => {
-      if(c1.type === c2.type) return
+    qt.getCollisions().forEach(([c1, c2]) => {
+      if (c1.type === c2.type) return
       // TODO add in the attacking info
     })
 

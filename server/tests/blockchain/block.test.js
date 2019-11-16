@@ -7,9 +7,9 @@ const TestBlocks = require('./testSetup')
 
 describe('Block', () => {
   const blockData = [
-      TestBlocks.valid.genesis,
-      TestBlocks.valid.transaction,
-      TestBlocks.invalid.noTransactions,
+    TestBlocks.valid.genesis,
+    TestBlocks.valid.transaction,
+    TestBlocks.invalid.noTransactions,
   ]
 
   it('Should have appropriate static methods', () => {

@@ -1,4 +1,4 @@
-export const onSegment = ({p1, p2, p3}) => {
+export const onSegment = (p1, p2, p3) => {
   return (
     p2.x <= Math.max(p1.x, p3.x) && p2.x >= Math.min(p1.x, p3.x) &&
     p2.y <= Math.max(p1.y, p3.y) && p2.y >= Math.min(p1.y, p3.y)
@@ -11,7 +11,7 @@ export const ORIENTATIONS = Object.freeze({
   couterclockwise: 2,
 })
 
-export const orientation = ({p1, p2, p3}) => {
+export const orientation = (p1, p2, p3) => {
   const val = (
     (p2.y - p1.y) *
     (p3.x - p2.x) -

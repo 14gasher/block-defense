@@ -18,6 +18,7 @@ export class MainOffense extends OffenseBase {
       pwr: 2,
       atkSpeed: 500, // ms
       atkRange: 5,
+      speed: 5 / 1000,
       src: isEnemy ? 'resources/units/jelly-fish-bad.png' : 'resources/units/jelly-fish-team.png',
       enemyHome,
     })
