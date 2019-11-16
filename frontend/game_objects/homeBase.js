@@ -8,3 +8,4 @@ class HomeBase extends Sprite {
 }
 
 module.exports = HomeBase
+
