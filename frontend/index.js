@@ -1,9 +1,11 @@
-const blah = 'A new blah'
+import TD from './td'
 
-const div = document.createElement('div')
-div.innerText = 'blah'
-document.body.appendChild(div)
+const canvasId = 'game_canvas'
+const canvas = document.createElement('canvas')
+canvas.id = canvasId
+document.body.appendChild(canvas)
 
-console.log('Testing')
-
-module.exports = blah
+setTimeout(() => {
+  const game = new TD({canvasId})
+  game.startGame()
+}, 1000)

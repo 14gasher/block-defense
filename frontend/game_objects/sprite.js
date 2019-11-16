@@ -1,11 +1,11 @@
 const Texture = require('../game_engine/drawables/texture')
 const Z_INDEX = require('../game_engine/drawables/zIndex')
 
-class Sprite { 
+class Sprite {
   constructor({
-    health, 
-    pos, 
-    type, 
+    health,
+    pos,
+    type,
     src,
     collisionRadius,
   }) {
@@ -16,10 +16,15 @@ class Sprite {
       x: pos.x,
       y: pos.y,
     }
+    this.center = this.position
+    this.dimensions = {
+      height: 50,
+      width: 50,
+    }
     this.renderable = new Texture({
       src: src,
       center: this.position, // reference to this to allow simple updates
-      // dimensions: this.dimensions,
+      dimensions: this.dimensions,
       z_index: Z_INDEX.FOREGROUND,
     })
   }
@@ -37,9 +42,11 @@ class Sprite {
     this.health -= attack
   }
 
-  isAlive() { 
+  isAlive() {
     return this.health >= 0
   }
+
+  getRenderable() {return this.renderable}
 }
 
 module.exports = Sprite

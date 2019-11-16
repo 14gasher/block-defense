@@ -1,5 +1,9 @@
 const particleImages = {}
 
+import Drawable from './drawables/drawable'
+import ZINDEX from './drawables/zIndex'
+import RandomGenerator from './randomEngine'
+
 ;[ // Colors available, alphabetized for your sake
   'black',
   'blue',
@@ -70,6 +74,7 @@ class ParticleEngine {
 class Particle extends Drawable {
   constructor(specs) {
     super(specs, 'Particle')
+    // eslint-disable-next-line no-prototype-builtins
     if(!specs.hasOwnProperty('particleColor')) throw 'ERROR: particleColor not defined. Particles must have a predefined particle color!'
     Object.assign(this, {
       texture: particleImages[specs.particleColor],
@@ -105,4 +110,4 @@ class Particle extends Drawable {
   }
 }
 
-module.exports = ParticleEngine
+export default ParticleEngine
