@@ -41,8 +41,8 @@ class OffenseBaseObject extends Sprite {
 
   findDirection(obstacles) {
     let nextMove = this.findShortestPath(obstacles)
-    console.log(nextMove)
-    if(nextMove.x === this.position.x && nextMove.y === this.position.y) {
+    const similar = (v1,v2) => Math.abs(v1 - v2) < 2
+    if(!(similar(nextMove.x, this.position.x) && similar(nextMove.y, this.position.y))) {
       this.speed = this.origSpeed
       return (new Vector({
         components: {
@@ -52,6 +52,7 @@ class OffenseBaseObject extends Sprite {
       })).direction
     }
     this.speed = 0
+    return 0
   }
 
   findShortestPath(obstacles) {
@@ -100,14 +101,11 @@ class OffenseBaseObject extends Sprite {
           })
         })
 
-      console.log(obstructions)
-
       if(obstructions.length === 0) {
-        const newWeight = startWeight + this.calcDistanceWeight(this.position, this.enemyHome.position)
-        console.log(newWeight)
+        const newWeight = startWeight + this.calcDistanceWeight(position, this.enemyHome.position)
         if(newWeight < bestWeight) {
           bestWeight = newWeight
-          bestHistory = history.concat([position])
+          bestHistory = history.concat([this.enemyHome.position])
         }
         break
       }
@@ -123,7 +121,7 @@ class OffenseBaseObject extends Sprite {
               tl:obstacle.tl,
               bl:obstacle.bl
             }]),
-            history: history.concat([position])
+            history: history.concat([{ x: obstacle.x, y: obstacle.y }])
           })
           // weight if move to edges
           priorityQ.push({
@@ -135,7 +133,7 @@ class OffenseBaseObject extends Sprite {
               tl: obstacle.tl,
               bl: obstacle.bl
             }]),
-            history: history.concat([position])
+            history: history.concat([obstacle.tr])
           })
           priorityQ.push({
             startWeight: startWeight + this.calcDistanceWeight(obstacle.tl, position),
@@ -146,7 +144,7 @@ class OffenseBaseObject extends Sprite {
               tl: obstacle.tl,
               bl: obstacle.bl
             }]),
-            history: history.concat([position])
+            history: history.concat([obstacle.tl])
           })
         })
 
@@ -154,7 +152,6 @@ class OffenseBaseObject extends Sprite {
         .filter(a => a.startWeight < bestWeight)
         .sort((a, b) => (b.startWeight - a.startWeight))
     }
-    console.log(bestWeight, bestHistory)
     return bestHistory[0]
   }
 
@@ -162,7 +159,6 @@ class OffenseBaseObject extends Sprite {
     const dx = obstacle.x - position.x
     const dy = obstacle.y - position.y
     const distance = Math.sqrt(dx * dx + dy * dy)
-    console.log(dx, dy, distance)
     return distance * this.origSpeed
   }
 

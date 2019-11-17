@@ -23,7 +23,8 @@ class TowerDefense extends GameEngine {
     const home = new HomeBase({ position: { x: this.dimensions.width / 2, y: this.dimensions.height - 50 }, isEnemy: false })
     this.gameObjects = [
       enemyHome,
-      home
+      home,
+      ...Array(5).fill(0).map((a,i) => new Wall({isEnemy: true, position: {x: 50 * (i + 2) + 10, y: 100}}))
     ]
 
     this.input.clearListeners()
